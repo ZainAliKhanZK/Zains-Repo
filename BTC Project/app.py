@@ -4,7 +4,8 @@ import yfinance as yf
 from keras.models import load_model
 from sklearn.preprocessing import MinMaxScaler
 import streamlit as st
-#load Model 
+
+#Loading Model 
 model = load_model('C:\Z Drive\Data Science NED\BTC_PROJECT\BTC_PRICE_PREDICTION_Model.keras')
 
 st.header('Bitcoin Price Prediction Model')
@@ -51,7 +52,7 @@ st.line_chart(chart_data)
 
 m = y
 z= []
-future_days = 5
+future_days = 30
 for i in range(base_days, len(m)+future_days):
     m = m.reshape(-1,1)
     inter = [m[-base_days:,0]]
@@ -63,4 +64,5 @@ for i in range(base_days, len(m)+future_days):
 st.subheader('Predicted Future Days Bitcoin Price')
 z = np.array(z)
 z = scaler.inverse_transform(z.reshape(-1,1))
+
 st.line_chart(z)
